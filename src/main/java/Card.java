@@ -1,24 +1,24 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by mbeothy on 2016. 12. 08..
  */
 public class Card {
-    private String cardColor;
-    private int cardNumber;
-    private Map<String, Integer> alphabeticCardValue = new HashMap<String, Integer>() {{
+    private static final List<String> possibleCardColors = Arrays.asList("S", "C", "H", "D");
+    private static final Map<String, Integer> alphabeticCardValue = new HashMap<String, Integer>() {{
         put("J", 11);
         put("Q", 12);
         put("K", 13);
         put("A", 14);
     }};
+    private String cardColor;
+    private int cardNumber;
+
 
     public Card(String cardValue) throws IllegalArgumentException {
         String firstValue = cardValue.substring(0, 1).toUpperCase();
         String secondValue = cardValue.substring(1, cardValue.length()).toUpperCase();
-        if (!(Arrays.asList("S", "C", "H", "D").contains(firstValue))) {
+        if (!(possibleCardColors.contains(firstValue))) {
             throw new IllegalArgumentException("Not a valid color" + firstValue);
         }
         this.cardColor = firstValue;
@@ -36,4 +36,11 @@ public class Card {
         return cardNumber;
     }
 
+    @Override
+    public String toString() {
+        return "Card{" +
+                "cardColor='" + cardColor + '\'' +
+                ", cardNumber=" + cardNumber +
+                '}';
+    }
 }

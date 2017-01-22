@@ -1,5 +1,4 @@
 
-import java.util.HashMap;
 
 /**
  * Created by mbeothy on 2016. 12. 08..
@@ -7,9 +6,10 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        PokerClient pokerClient = new PokerClient("h3", "d2", "s3", "s4", "cq");
+        PokerClient pokerClient = new PokerClient("h3", "d4", "s5", "s6", "cq");
         System.out.println("the highest card is mine: " + pokerClient.highestCardIsMine("s3", "h4", "s5", "d6", "sj"));
         System.out.println("the highest card is mine: " + pokerClient.highestCardIsMine("s3", "h4", "s5", "d6", "sk"));
+
     }
 
 }

@@ -1,29 +1,42 @@
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+
 import static org.junit.Assert.*;
 
 public class TestPokerClient {
 
-    @Test
-    public void highestCardIsMine() {
-        PokerClient pokerClient = new PokerClient("h3", "d2", "s3", "s4", "cq");
-        assertEquals(pokerClient.highestCardIsMine("s3", "h4", "s5", "d6", "sk"), false);
+    private PokerClient pokerClient;
+
+    @Before
+    public void setUp(){
+        pokerClient = new PokerClient("h3", "d2", "s3", "s4", "cq");
+    }
+
+    @After
+    public void tearDown() {
+        pokerClient = null;
     }
 
     @Test
-    public void highestCardIsMine2() {
-        PokerClient pokerClient = new PokerClient("h3", "d2", "s3", "s4", "cq");
-        assertEquals(pokerClient.highestCardIsMine("s3", "h4", "s5", "d6", "sj"), true);
+    public void highestCardIsMine() {
+        assertTrue(pokerClient.highestCardIsMine("s3", "h4", "s5", "d6", "sk"));
+    }
+
+    @Test
+    public void highestCardIsNotMine() {
+        assertTrue(pokerClient.highestCardIsMine("s3", "h4", "s5", "d6", "s6"));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void invalidPokerClient(){
-        PokerClient pokerClient = new PokerClient("cc", "sd", "nn", "mm", "qq");;
+        PokerClient wrongPokerClient = new PokerClient("cc", "sd", "nn", "mm", "qq");;
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void invalidCard() {
-        PokerClient pokerClient = new PokerClient("h3", "d2", "s3", "s4", "cq");
-        assertEquals(pokerClient.highestCardIsMine("xx", "cc", "vv", "bb", "nn"), true);
+    @Test
+    public void highestCardIsMineEquals(){
+        assertTrue(pokerClient.highestCardIsMine("h3", "d2", "s3", "s4", "cq"));
     }
 
 }

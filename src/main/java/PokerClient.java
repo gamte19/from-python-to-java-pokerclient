@@ -1,25 +1,35 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by mbeothy on 2016. 12. 08..
  */
 public class PokerClient {
-    private List<Integer> clientCards = new ArrayList();
+    private List<Card> myCards = new ArrayList();
 
-    public PokerClient(String p1, String p2, String p3, String p4, String p5) {
-        clientCards.addAll(Arrays.asList(new Card(p1).getValue(), new Card(p2).getValue(), new Card(p3).getValue(),
-                new Card(p4).getValue(), new Card(p5).getValue()));
+    public PokerClient(String card1, String card2, String card3, String card4, String card5) {
+        this.myCards.addAll(Arrays.asList(new Card(card1), new Card(card2), new Card(card3),
+                new Card(card4), new Card(card5)));
     }
 
-    public boolean highestCardIsMine(String p1, String p2, String p3, String p4, String p5) {
-        List<Integer> myCard = new ArrayList();
-        myCard.addAll(Arrays.asList(new Card(p1).getValue(), new Card(p2).getValue(), new Card(p3).getValue(),
-                new Card(p4).getValue(), new Card(p5).getValue()));
-        return Collections.max(clientCards) > Collections.max(myCard);
-    }
+    public boolean highestCardIsMine(String card1, String card2, String card3, String card4, String card5) {
+        List<Card> clientCards = new ArrayList();
+        int myCardValue = 0;
+        int clientCardValue = 0;
+        clientCards.addAll(Arrays.asList(new Card(card1), new Card(card2), new Card(card3),
+                new Card(card4), new Card(card5)));
 
+
+        for (Card myCard : myCards) {
+            myCardValue += myCard.getValue();
+        }
+
+        for (Card clientCard : clientCards){
+            clientCardValue += clientCard.getValue();
+        }
+
+        return clientCardValue >= myCardValue;
+    }
 
 }
